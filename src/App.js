@@ -1,25 +1,66 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+
+
 
 function App() {
+  
+  const [kmPerLiter, setKmPerLiter] = useState('');
+  const [travelDistance, setTravelDistance] = useState('');
+  const [costGas, setCostGas] = useState('');
+  const [result, setResult] = useState(false);
+  
+ 
+  
+  
+  const handleForm = (e) => {
+    e.preventDefault()
+  }
+  
+  const handleAutonomy = () => {
+    
+    let costPerKm;
+    costPerKm = (costGas/kmPerLiter);
+    return(costPerKm)
+  }
+  
+  const handleTravel = () => {
+   
+    let totalTravelCost
+    let costPerKm = handleAutonomy();
+
+    totalTravelCost = (costPerKm * travelDistance);
+    return(totalTravelCost)
+  }
+
+ 
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+
+        <h1 className="title">Quanto Custa Ir!</h1>
+
+        <form className="form" onSubmit={handleForm}>
+          <label>Quanto o carro faz por litro?</label>
+          <input type="number" value = {kmPerLiter} onChange = {(e) => setKmPerLiter(e.target.value)}></input>
+          <label>Quanto custa a gasolina atualmente?</label>
+          <input type="number" value = {costGas} onChange = {(e) => setCostGas(e.target.value)}></input>
+          <label>Qual a distância que preciso percorrer?</label>
+          <input type="number" value = {travelDistance} onChange = {(e) => setTravelDistance(e.target.value)}></input>
+          
+        </form>
+        <button onClick={() => setResult(true)}>Calcular!</button>
+        <div>
+         { result ? `Com ${handleAutonomy()} você consegue andar 1 km. 
+         O custo da viagem que você pretende fazer é de ${handleTravel()}`:``}
+        </div>  
+        
       </header>
     </div>
   );
 }
+
+
 
 export default App;
