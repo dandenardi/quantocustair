@@ -21,7 +21,9 @@ function App() {
     
     let costPerKm;
     costPerKm = (costGas/kmPerLiter);
-    return(costPerKm)
+    
+
+    return (costPerKm)
   }
   
   const handleTravel = () => {
@@ -30,7 +32,9 @@ function App() {
     let costPerKm = handleAutonomy();
 
     totalTravelCost = (costPerKm * travelDistance);
-    return(totalTravelCost)
+    
+    return (totalTravelCost)
+
   }
 
  
@@ -52,8 +56,8 @@ function App() {
         </form>
         <button onClick={() => setResult(true)}>Calcular!</button>
         <div>
-         { result ? `Com ${handleAutonomy()} você consegue andar 1 km. 
-         O custo da viagem que você pretende fazer é de ${handleTravel()}`:``}
+         { result ? `Com ${handleAutonomy().toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} você consegue andar 1 km. 
+         O custo da viagem que você pretende fazer é de ${handleTravel().toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`:``}
         </div>  
         
       </header>
